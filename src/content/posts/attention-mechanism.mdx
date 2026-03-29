@@ -1,0 +1,58 @@
+---
+title: "Understanding the Attention Mechanism"
+date: "2026-03-29"
+description: "A walkthrough of how attention works in transformers, with math and a minimal implementation."
+tags: ["transformers", "attention", "from-scratch"]
+---
+
+## Why attention?
+
+In sequence-to-sequence models, the bottleneck was compressing an entire input sequence into a single fixed-length vector. Attention solves this by letting the model look at all input positions when producing each output token.
+
+## The math
+
+Given queries $Q$, keys $K$, and values $V$, scaled dot-product attention is:
+
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+
+Where $d_k$ is the dimension of the keys. The $\sqrt{d_k}$ scaling prevents the dot products from growing too large, which would push softmax into regions with tiny gradients.
+
+## Step by step
+
+1. **Compute similarity scores**: $QK^T$ gives us how much each query "attends to" each key
+2. **Scale**: Divide by $\sqrt{d_k}$ to stabilize gradients
+3. **Normalize**: Softmax converts scores to weights that sum to 1
+4. **Aggregate**: Multiply weights by values to get the output
+
+## Minimal implementation
+
+```python
+import torch
+import torch.nn.functional as F
+
+def scaled_dot_product_attention(Q, K, V, mask=None):
+    """
+    Q, K, V: (batch, heads, seq_len, d_k)
+    """
+    d_k = Q.size(-1)
+    scores = torch.matmul(Q, K.transpose(-2, -1)) / (d_k ** 0.5)
+
+    if mask is not None:
+        scores = scores.masked_fill(mask == 0, float('-inf'))
+
+    weights = F.softmax(scores, dim=-1)
+    return torch.matmul(weights, V), weights
+```
+
+## What I learned
+
+- The scaling factor matters more than you'd think. Without it, training becomes unstable for large $d_k$.
+- The mask is crucial for autoregressive models — it prevents attending to future tokens.
+- This is just single-head attention. Multi-head attention runs several of these in parallel with different learned projections.
+
+## References
+
+- Vaswani et al., "Attention Is All You Need" (2017)
+- [The Illustrated Transformer](https://jalammar.github.io/illustrated-transformer/) by Jay Alammar
