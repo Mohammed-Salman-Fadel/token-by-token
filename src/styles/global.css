@@ -109,6 +109,42 @@ body {
   margin-bottom: 0.5rem;
 }
 
+/* === Sidebar Toggle === */
+.sidebar-toggle {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  background: var(--color-sidebar-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--color-text);
+  line-height: 1;
+  transition: left 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+  background: var(--color-border);
+}
+
+.sidebar {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-collapsed {
+  left: 1rem;
+}
+
 /* === Main Content === */
 .main-content {
   flex: 1;

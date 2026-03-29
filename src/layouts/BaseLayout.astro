@@ -38,6 +38,7 @@ const { title, description = 'Learning ML, one token at a time.' } = Astro.props
   </head>
   <body>
     <div class="site-wrapper">
+      <button class="sidebar-toggle" aria-label="Toggle sidebar">&#9776;</button>
       <aside class="sidebar">
         <a href="/" class="sidebar-title">token by token</a>
         <div class="sidebar-subtitle">ML notes & explorations</div>
@@ -66,5 +67,13 @@ const { title, description = 'Learning ML, one token at a time.' } = Astro.props
         </footer>
       </main>
     </div>
+    <script>
+      const toggle = document.querySelector('.sidebar-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      toggle?.addEventListener('click', () => {
+        sidebar?.classList.toggle('hidden');
+        toggle.classList.toggle('sidebar-collapsed');
+      });
+    </script>
   </body>
 </html>
