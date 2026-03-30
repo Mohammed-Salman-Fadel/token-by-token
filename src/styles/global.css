@@ -348,30 +348,28 @@ th {
   text-align: center;
 }
 
-/* === Responsive === */
-@media (max-width: 900px) {
-  .sidebar {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 260px;
-    height: 100vh;
-    z-index: 50;
-    transform: none;
-    opacity: 1;
-    pointer-events: auto;
-  }
+/* === Responsive: sidebar as overlay when space is tight === */
+.sidebar.auto-hidden {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  z-index: 50;
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
 
-  .sidebar.mobile-open {
-    display: block;
-  }
+.sidebar.auto-hidden.mobile-open {
+  display: block;
+}
 
-  .main-content {
-    padding: 2rem 1.2rem 4rem;
-  }
+.compact-mode .main-content {
+  padding: 2rem 1.2rem 4rem;
+}
 
-  h1 {
-    font-size: 1.8rem;
-  }
+.compact-mode h1 {
+  font-size: 1.8rem;
 }

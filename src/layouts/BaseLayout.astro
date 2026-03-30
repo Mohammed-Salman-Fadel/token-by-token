@@ -70,19 +70,34 @@ const { title, description = 'Learning ML, one token at a time.' } = Astro.props
     <script>
       const toggle = document.querySelector('.sidebar-toggle');
       const sidebar = document.querySelector('.sidebar');
-      const isMobile = () => window.innerWidth <= 900;
+      const wrapper = document.querySelector('.site-wrapper');
+      const sidebarWidth = 260;
+      const minContentWidth = 600;
+
+      function checkSpace() {
+        const isTight = window.innerWidth < sidebarWidth + minContentWidth;
+        if (isTight) {
+          sidebar?.classList.add('auto-hidden');
+          document.body.classList.add('compact-mode');
+        } else if (!sidebar?.classList.contains('hidden')) {
+          sidebar?.classList.remove('auto-hidden', 'mobile-open');
+          document.body.classList.remove('compact-mode');
+        }
+      }
+
+      checkSpace();
+      window.addEventListener('resize', checkSpace);
 
       toggle?.addEventListener('click', () => {
-        if (isMobile()) {
-          sidebar?.classList.toggle('mobile-open');
+        if (sidebar?.classList.contains('auto-hidden')) {
+          sidebar.classList.toggle('mobile-open');
         } else {
           sidebar?.classList.toggle('hidden');
         }
       });
 
-      // Close mobile menu when clicking outside
       document.addEventListener('click', (e) => {
-        if (isMobile() && sidebar?.classList.contains('mobile-open')) {
+        if (sidebar?.classList.contains('mobile-open')) {
           if (!sidebar.contains(e.target as Node) && e.target !== toggle) {
             sidebar.classList.remove('mobile-open');
           }
