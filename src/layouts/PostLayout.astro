@@ -24,21 +24,62 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
   <article>
     <h1>{frontmatter.title}</h1>
     <div class="post-meta">
+      {frontmatter.author && <span>{frontmatter.author}</span>}
       <time>{formattedDate}</time>
-      {frontmatter.author && <span> &middot; {frontmatter.author}</span>}
       {lastModified && lastModified !== formattedDate && (
-        <span> &middot; Updated {lastModified}</span>
+        <span class="updated">Updated {lastModified}</span>
       )}
-      {
-        frontmatter.tags && (
-          <span class="tags">
-            {' '}&middot; <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>{' '}
-            {frontmatter.tags.join(', ')}
-          </span>
-        )
-      }
     </div>
+    {
+      frontmatter.tags && (
+        <div class="post-tags">
+          {frontmatter.tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      )
+    }
 
     <slot />
   </article>
 </BaseLayout>
+
+<style>
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .post-meta span:not(:last-child)::after,
+  .post-meta time:not(:last-child)::after {
+    content: '·';
+    margin-left: 0.5rem;
+  }
+
+  .updated {
+    font-style: italic;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .post-tags .tag {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+    background: var(--color-sidebar-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    padding: 0.15rem 0.5rem;
+    letter-spacing: 0.02em;
+  }
+</style>
