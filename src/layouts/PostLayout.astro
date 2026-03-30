@@ -9,9 +9,10 @@ interface Props {
     description?: string;
     tags?: string[];
   };
+  lastModified?: string | null;
 }
 
-const { frontmatter } = Astro.props;
+const { frontmatter, lastModified } = Astro.props;
 const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
@@ -25,6 +26,9 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
     <div class="post-meta">
       <time>{formattedDate}</time>
       {frontmatter.author && <span> &middot; {frontmatter.author}</span>}
+      {lastModified && lastModified !== formattedDate && (
+        <span> &middot; Updated {lastModified}</span>
+      )}
       {
         frontmatter.tags && (
           <span>
