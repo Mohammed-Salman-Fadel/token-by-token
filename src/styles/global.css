@@ -352,6 +352,19 @@ th {
 @media (max-width: 900px) {
   .sidebar {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    z-index: 50;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sidebar.mobile-open {
+    display: block;
   }
 
   .main-content {

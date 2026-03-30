@@ -70,9 +70,23 @@ const { title, description = 'Learning ML, one token at a time.' } = Astro.props
     <script>
       const toggle = document.querySelector('.sidebar-toggle');
       const sidebar = document.querySelector('.sidebar');
+      const isMobile = () => window.innerWidth <= 900;
+
       toggle?.addEventListener('click', () => {
-        sidebar?.classList.toggle('hidden');
-        toggle.classList.toggle('sidebar-collapsed');
+        if (isMobile()) {
+          sidebar?.classList.toggle('mobile-open');
+        } else {
+          sidebar?.classList.toggle('hidden');
+        }
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (isMobile() && sidebar?.classList.contains('mobile-open')) {
+          if (!sidebar.contains(e.target as Node) && e.target !== toggle) {
+            sidebar.classList.remove('mobile-open');
+          }
+        }
       });
     </script>
   </body>
