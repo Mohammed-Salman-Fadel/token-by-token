@@ -5,6 +5,7 @@ interface Props {
   frontmatter: {
     title: string;
     date: string;
+    author?: string;
     description?: string;
     tags?: string[];
   };
@@ -23,6 +24,7 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
     <h1>{frontmatter.title}</h1>
     <div class="post-meta">
       <time>{formattedDate}</time>
+      {frontmatter.author && <span> &middot; {frontmatter.author}</span>}
       {
         frontmatter.tags && (
           <span>
