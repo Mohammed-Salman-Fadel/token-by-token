@@ -212,8 +212,9 @@ a:hover {
   background: var(--color-sidebar-bg);
   border: 1px solid var(--color-border);
   border-radius: 3px;
-  padding: 0.1rem 0.5rem;
+  padding: 0.15rem 0.5rem;
   margin-right: 0.4rem;
+  margin-bottom: 0.3rem;
   font-size: 0.75rem;
 }
 
