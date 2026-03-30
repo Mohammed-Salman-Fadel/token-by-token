@@ -14,7 +14,7 @@ In sequence-to-sequence models, the bottleneck was compressing an entire input s
 Given queries $Q$, keys $K$, and values $V$, scaled dot-product attention is:
 
 $$
-\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^{T}}{\sqrt{d_k}}\right)V
 $$
 
 Where $d_k$ is the dimension of the keys. The $\sqrt{d_k}$ scaling prevents the dot products from growing too large, which would push softmax into regions with tiny gradients.
