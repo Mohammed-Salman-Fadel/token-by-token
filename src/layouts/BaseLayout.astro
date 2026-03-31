@@ -66,6 +66,47 @@ const currentPath = Astro.url.pathname;
       .topbar-nav a.active:visited {
         color: var(--color-accent);
       }
+      .search-wrapper {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+      .search-wrapper svg {
+        position: absolute;
+        left: 0.8rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--color-text-muted);
+        opacity: 0.5;
+        width: 16px !important;
+        height: 16px !important;
+      }
+      .search-input {
+        width: 100%;
+        padding: 0.6rem 0.8rem 0.6rem 2.4rem;
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 0.88rem;
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        background: var(--color-card-bg);
+        color: var(--color-text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .search-input::placeholder {
+        color: var(--color-text-muted);
+        opacity: 0.6;
+      }
+      .search-input:focus {
+        border-color: var(--color-accent);
+      }
+      .subtle-link {
+        color: var(--color-text-muted) !important;
+        text-decoration: none !important;
+      }
+      .subtle-link:hover {
+        color: var(--color-accent) !important;
+        text-decoration: underline !important;
+      }
     </style>
 
     <!-- Theme: apply before render to prevent flash -->
