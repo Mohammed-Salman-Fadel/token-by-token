@@ -615,8 +615,32 @@ th {
 
 /* === Responsive === */
 @media (max-width: 700px) {
+  .topbar {
+    padding: 0 1rem;
+  }
+
+  .topbar-name {
+    font-size: 1rem;
+  }
+
+  .topbar-logo {
+    width: 30px;
+  }
+
   .topbar-nav {
     display: none;
+  }
+
+  .topbar-github {
+    display: none;
+  }
+
+  .theme-toggle {
+    font-size: 1rem;
+  }
+
+  .topbar-right {
+    gap: 1rem;
   }
 
   .burger {
@@ -624,10 +648,35 @@ th {
   }
 
   .main-content {
-    padding: calc(var(--topbar-height) + 1.5rem) 1.2rem 4rem;
+    padding: calc(var(--topbar-height) + 1.5rem) 1rem 4rem;
   }
 
   h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .post-title {
+    font-size: 1.3rem;
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+  }
+
+  .stats-bar {
+    gap: 1.2rem;
+  }
+
+  .stat-number {
+    font-size: 1.1rem;
+  }
+
+  .footer-row {
+    flex-direction: column;
+    gap: 0.8rem;
   }
 }
