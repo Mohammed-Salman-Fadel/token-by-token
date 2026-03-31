@@ -1,6 +1,7 @@
 ---
 import HomeLayout from '../layouts/HomeLayout.astro';
 import { getCollection } from 'astro:content';
+import { execSync } from 'child_process';
 
 const posts = (await getCollection('posts')).sort(
   (a, b) =>
@@ -24,6 +25,21 @@ posts.forEach((p) => {
   }
 });
 const authors = [...authorCounts.entries()].sort((a, b) => b[1] - a[1]);
+
+// Latest git commit
+let latestCommit = { message: '', date: '', hash: '' };
+try {
+  const log = execSync('git log -1 --format=%s|||%cI|||%h').toString().trim();
+  const [message, date, hash] = log.split('|||');
+  latestCommit = {
+    message: message.length > 50 ? message.slice(0, 50) + '...' : message,
+    date: new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+    hash,
+  };
+} catch {}
+
+// Activity timeline (last 5 posts)
+const recentActivity = posts.slice(0, 5);
 ---
 
 <HomeLayout title="Home">
@@ -37,13 +53,35 @@ const authors = [...authorCounts.entries()].sort((a, b) => b[1] - a[1]);
         </p>
       </section>
 
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="stat">
+          <span class="stat-number">{posts.length}</span>
+          <span class="stat-label">posts</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">{tags.length}</span>
+          <span class="stat-label">topics</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">{authors.length}</span>
+          <span class="stat-label">authors</span>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="search-wrapper">
+        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="search-input" placeholder="Search posts..." class="search-input" />
+      </div>
+
       <h2>Recent posts</h2>
 
       {
         posts.length > 0 ? (
-          <div class="post-list">
+          <div class="post-list" id="post-list">
             {posts.map((post) => (
-              <div class="post-item">
+              <div class="post-item" data-title={post.data.title.toLowerCase()} data-tags={(post.data.tags || []).join(' ').toLowerCase()} data-author={(post.data.author || '').toLowerCase()} data-desc={(post.data.description || '').toLowerCase()}>
                 <a href={`/posts/${post.id}`} class="post-title">{post.data.title}</a>
                 <div class="post-subtitle">
                   {post.data.author && (
@@ -103,6 +141,42 @@ const authors = [...authorCounts.entries()].sort((a, b) => b[1] - a[1]);
         </div>
       )}
 
+      <!-- Activity timeline -->
+      {recentActivity.length > 0 && (
+        <div class="sidebar-card">
+          <h3>Activity</h3>
+          <div class="activity-timeline">
+            {recentActivity.map((post) => (
+              <div class="activity-item">
+                <div class="activity-dot" />
+                <div class="activity-text">
+                  <span class="activity-author">{post.data.author || 'Anonymous'}</span> published <a href={`/posts/${post.id}`} class="subtle-link">{post.data.title}</a>
+                  <span class="activity-date">{new Date(post.data.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Latest commit -->
+      {latestCommit.hash && (
+        <div class="sidebar-card">
+          <h3>Latest update</h3>
+          <div class="latest-commit">
+            <a href={`https://github.com/danielquillanroxas/token-by-token/commit/${latestCommit.hash}`} target="_blank" rel="noopener" class="subtle-link commit-msg">{latestCommit.message}</a>
+            <span class="commit-meta">{latestCommit.hash} &middot; {latestCommit.date}</span>
+          </div>
+        </div>
+      )}
+
+      <!-- Newsletter -->
+      <div class="sidebar-card">
+        <h3>Newsletter</h3>
+        <p>Get notified when we publish. No spam.</p>
+        <div class="newsletter-placeholder">Coming soon</div>
+      </div>
+
       <div class="sidebar-card">
         <a href="https://notbyai.fyi/hi/token-by-token/" target="_blank" rel="noopener" class="not-by-ai-sidebar">
           <img src="/not-by-ai-dark.png" alt="Written by Humans, Not by AI" class="light-only" />
@@ -111,4 +185,23 @@ const authors = [...authorCounts.entries()].sort((a, b) => b[1] - a[1]);
       </div>
     </aside>
   </div>
+
+  <script>
+    const input = document.getElementById('search-input') as HTMLInputElement;
+    const postList = document.getElementById('post-list');
+    if (input && postList) {
+      input.addEventListener('input', () => {
+        const q = input.value.toLowerCase().trim();
+        const items = postList.querySelectorAll('.post-item') as NodeListOf<HTMLElement>;
+        items.forEach((item) => {
+          const title = item.dataset.title || '';
+          const tags = item.dataset.tags || '';
+          const author = item.dataset.author || '';
+          const desc = item.dataset.desc || '';
+          const match = !q || title.includes(q) || tags.includes(q) || author.includes(q) || desc.includes(q);
+          item.style.display = match ? '' : 'none';
+        });
+      });
+    }
+  </script>
 </HomeLayout>

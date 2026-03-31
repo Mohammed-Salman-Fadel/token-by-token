@@ -156,10 +156,138 @@ const currentPath = Astro.url.pathname;
         color: var(--color-accent) !important;
         text-decoration: underline !important;
       }
+      /* Stats bar */
+      .stats-bar {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .stat {
+        display: flex;
+        align-items: baseline;
+        gap: 0.3rem;
+      }
+      .stat-number {
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--color-text);
+      }
+      .stat-label {
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 0.78rem;
+        color: var(--color-text-muted);
+        font-weight: 300;
+      }
+
+      /* Search */
+      .search-wrapper {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+      .search-wrapper svg {
+        position: absolute;
+        left: 0.8rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--color-text-muted);
+        opacity: 0.5;
+        width: 16px !important;
+        height: 16px !important;
+      }
+      .search-input {
+        width: 100%;
+        padding: 0.6rem 0.8rem 0.6rem 2.4rem;
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 0.88rem;
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        background: var(--color-card-bg);
+        color: var(--color-text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .search-input::placeholder {
+        color: var(--color-text-muted);
+        opacity: 0.6;
+      }
+      .search-input:focus {
+        border-color: var(--color-accent);
+      }
+
+      /* Activity timeline */
+      .activity-timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .activity-item {
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+        font-size: 0.78rem;
+        line-height: 1.5;
+      }
+      .activity-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--color-accent);
+        flex-shrink: 0;
+        margin-top: 0.4rem;
+      }
+      .activity-text {
+        font-family: 'Inter', -apple-system, sans-serif;
+        color: var(--color-text-muted);
+      }
+      .activity-author {
+        font-weight: 500;
+        color: var(--color-text);
+      }
+      .activity-date {
+        display: block;
+        font-size: 0.7rem;
+        opacity: 0.6;
+        margin-top: 0.1rem;
+      }
+
+      /* Latest commit */
+      .latest-commit {
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 0.78rem;
+      }
+      .commit-msg {
+        display: block;
+        font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+        font-size: 0.75rem !important;
+        line-height: 1.4;
+        margin-bottom: 0.3rem;
+      }
+      .commit-meta {
+        font-size: 0.7rem;
+        color: var(--color-text-muted);
+        opacity: 0.6;
+      }
+
+      /* Newsletter placeholder */
+      .newsletter-placeholder {
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 0.8rem;
+        color: var(--color-text-muted);
+        opacity: 0.5;
+        font-style: italic;
+        padding: 0.5rem 0;
+      }
+
       @media (max-width: 900px) {
         .home-content {
           grid-template-columns: 1fr;
           padding: 2rem 1.2rem;
+        }
+        .stats-bar {
+          gap: 1.5rem;
         }
       }
     </style>
