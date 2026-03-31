@@ -75,36 +75,23 @@ const { title, description = 'Learning ML, one token at a time.' } = Astro.props
     <script>
       const toggle = document.querySelector('.sidebar-toggle');
       const sidebar = document.querySelector('.sidebar');
-      const wrapper = document.querySelector('.site-wrapper');
-      const sidebarWidth = 260;
-      const minContentWidth = 600;
+      const topbar = document.querySelector('.topbar');
 
-      function checkSpace() {
-        const isTight = window.innerWidth < sidebarWidth + minContentWidth;
-        if (isTight) {
-          sidebar?.classList.add('auto-hidden');
-          document.body.classList.add('compact-mode');
-        } else if (!sidebar?.classList.contains('hidden')) {
-          sidebar?.classList.remove('auto-hidden', 'mobile-open');
-          document.body.classList.remove('compact-mode');
-        }
-      }
-
-      checkSpace();
-      window.addEventListener('resize', checkSpace);
+      // Sidebar hidden by default
+      sidebar?.classList.add('hidden');
 
       toggle?.addEventListener('click', () => {
-        if (sidebar?.classList.contains('auto-hidden')) {
-          sidebar.classList.toggle('mobile-open');
-        } else {
-          sidebar?.classList.toggle('hidden');
-        }
+        const isHidden = sidebar?.classList.contains('hidden');
+        sidebar?.classList.toggle('hidden');
+        topbar?.classList.toggle('topbar-hidden');
       });
 
+      // Close sidebar when clicking outside
       document.addEventListener('click', (e) => {
-        if (sidebar?.classList.contains('mobile-open')) {
+        if (!sidebar?.classList.contains('hidden')) {
           if (!sidebar.contains(e.target as Node) && e.target !== toggle) {
-            sidebar.classList.remove('mobile-open');
+            sidebar.classList.add('hidden');
+            topbar?.classList.remove('topbar-hidden');
           }
         }
       });
