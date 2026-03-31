@@ -75,7 +75,7 @@ const recentActivity = posts.slice(0, 5);
       {
         posts.length > 0 ? (
           <div class="post-list" id="post-list">
-            {posts.map((post) => (
+            {posts.slice(0, 3).map((post) => (
               <div class="post-item" data-title={post.data.title.toLowerCase()} data-tags={(post.data.tags || []).join(' ').toLowerCase()} data-author={(post.data.author || '').toLowerCase()} data-desc={(post.data.description || '').toLowerCase()}>
                 <a href={`/posts/${post.id}`} class="post-title">{post.data.title}</a>
                 <div class="post-subtitle">
@@ -99,6 +99,9 @@ const recentActivity = posts.slice(0, 5);
           <p>No posts yet. Check back soon!</p>
         )
       }
+      {posts.length > 3 && (
+        <a href="/posts" class="view-all-link">View all posts &rarr;</a>
+      )}
     </div>
 
     <!-- Sidebar -->
