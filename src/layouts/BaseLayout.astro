@@ -42,56 +42,41 @@ const { title, description = 'Learning ML, one token at a time.' } = Astro.props
         <img src="/logo.png" alt="token by token" class="topbar-logo" />
         <span class="topbar-name">token by token</span>
       </a>
+      <nav class="topbar-nav">
+        <a href="/">Home</a>
+        <a href="/posts">Posts</a>
+        <a href="/about">About</a>
+      </nav>
+      <button class="burger" aria-label="Menu">&#9776;</button>
     </header>
-    <div class="site-wrapper">
-      <button class="sidebar-toggle" aria-label="Toggle sidebar">&#9776;</button>
-      <aside class="sidebar">
-        <a href="/" class="sidebar-logo"><img src="/logo.png" alt="token by token" /></a>
 
-        <div class="sidebar-section-title">Navigation</div>
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-          </ul>
-        </nav>
-
-        <div class="sidebar-section-title">Topics</div>
-        <nav>
-          <ul>
-            <li><a href="/posts">All Posts</a></li>
-          </ul>
-        </nav>
-      </aside>
-
-      <main class="main-content">
-        <slot />
-
-        <footer class="site-footer">
-          <p>token by token &mdash; learning in public</p>
-        </footer>
-      </main>
+    <!-- Mobile menu -->
+    <div class="mobile-menu">
+      <a href="/">Home</a>
+      <a href="/posts">Posts</a>
+      <a href="/about">About</a>
     </div>
+
+    <main class="main-content">
+      <slot />
+
+      <footer class="site-footer">
+        <p>token by token &mdash; learning in public</p>
+      </footer>
+    </main>
+
     <script>
-      const toggle = document.querySelector('.sidebar-toggle');
-      const sidebar = document.querySelector('.sidebar');
-      const topbar = document.querySelector('.topbar');
+      const burger = document.querySelector('.burger');
+      const mobileMenu = document.querySelector('.mobile-menu');
 
-      // Sidebar hidden by default
-      sidebar?.classList.add('hidden');
-
-      toggle?.addEventListener('click', () => {
-        const isHidden = sidebar?.classList.contains('hidden');
-        sidebar?.classList.toggle('hidden');
-        topbar?.classList.toggle('topbar-hidden');
+      burger?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('open');
       });
 
-      // Close sidebar when clicking outside
       document.addEventListener('click', (e) => {
-        if (!sidebar?.classList.contains('hidden')) {
-          if (!sidebar.contains(e.target as Node) && e.target !== toggle) {
-            sidebar.classList.add('hidden');
-            topbar?.classList.remove('topbar-hidden');
+        if (mobileMenu?.classList.contains('open')) {
+          if (!mobileMenu.contains(e.target as Node) && e.target !== burger) {
+            mobileMenu.classList.remove('open');
           }
         }
       });
