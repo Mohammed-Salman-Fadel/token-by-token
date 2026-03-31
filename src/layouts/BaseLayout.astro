@@ -37,6 +37,12 @@ const { title, description = 'Learning ML, one token at a time.' } = Astro.props
     </style>
   </head>
   <body>
+    <header class="topbar">
+      <a href="/" class="topbar-brand">
+        <img src="/logo.png" alt="token by token" class="topbar-logo" />
+        <span class="topbar-name">token by token</span>
+      </a>
+    </header>
     <div class="site-wrapper">
       <button class="sidebar-toggle" aria-label="Toggle sidebar">&#9776;</button>
       <aside class="sidebar">
