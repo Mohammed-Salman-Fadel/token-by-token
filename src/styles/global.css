@@ -56,23 +56,14 @@ body {
   flex-shrink: 0;
 }
 
-.sidebar-title {
-  font-family: var(--font-sans);
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  text-decoration: none;
+.sidebar-logo {
   display: block;
-  margin-bottom: 0.3rem;
+  margin-bottom: 1.5rem;
 }
 
-.sidebar-subtitle {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
+.sidebar-logo img {
+  width: 80px;
+  height: auto;
 }
 
 .sidebar nav ul {
