@@ -54,6 +54,18 @@ const currentPath = Astro.url.pathname;
         margin-right: 2px;
         opacity: 0.5;
       }
+      a:visited {
+        color: var(--color-link);
+      }
+      .post-title:visited {
+        color: var(--color-text);
+      }
+      .topbar-nav a:visited {
+        color: var(--color-text-muted);
+      }
+      .topbar-nav a.active:visited {
+        color: var(--color-accent);
+      }
     </style>
 
     <!-- Theme: apply before render to prevent flash -->
