@@ -48,7 +48,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
+  padding: 0 4rem;
   background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
 }
