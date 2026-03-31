@@ -107,6 +107,40 @@ const currentPath = Astro.url.pathname;
         color: var(--color-accent) !important;
         text-decoration: underline !important;
       }
+      .tag-pill, .author-pill {
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
+        background: var(--color-sidebar-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 3px;
+        padding: 0.2rem 0.6rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition: border-color 0.2s, color 0.2s;
+      }
+      .tag-pill:hover, .author-pill:hover {
+        color: var(--color-accent);
+        border-color: var(--color-accent);
+      }
+      .pill-count, .tag-count {
+        font-size: 0.65rem;
+        opacity: 0.6;
+      }
+      .tags-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      .filter-count {
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+        margin-bottom: 1.5rem;
+      }
     </style>
 
     <!-- Theme: apply before render to prevent flash -->
