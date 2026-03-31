@@ -435,25 +435,26 @@ th {
   text-align: center;
 }
 
-.footer-content {
+.footer-row {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1rem;
-}
-
-.footer-links {
-  display: flex;
+  justify-content: center;
   gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
-.footer-links a {
-  font-size: 0.82rem;
+.footer-row p {
+  margin: 0;
+}
+
+.footer-github {
   color: var(--color-text-muted);
-  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
 }
 
-.footer-links a:hover {
+.footer-github:hover {
   color: var(--color-accent);
 }
 
