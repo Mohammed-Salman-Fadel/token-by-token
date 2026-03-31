@@ -395,14 +395,18 @@ th {
   color: var(--color-text);
 }
 
-.post-subtitle {
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
+.post-subtitle,
+.post-subtitle * {
+  font-family: var(--font-sans) !important;
+  font-size: 0.85rem !important;
   color: var(--color-text-muted);
-  margin-top: 0.5rem;
-  font-weight: 200;
+  font-weight: 200 !important;
   line-height: 1.8;
   letter-spacing: 0.02em;
+}
+
+.post-subtitle {
+  margin-top: 0.5rem;
 }
 
 .post-subtitle svg {
