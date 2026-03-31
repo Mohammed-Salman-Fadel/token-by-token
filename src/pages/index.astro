@@ -70,12 +70,6 @@ const recentActivity = posts.slice(0, 5);
         </a>
       </div>
 
-      <!-- Search -->
-      <div class="search-wrapper">
-        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="search-input" placeholder="Search posts..." class="search-input" />
-      </div>
-
       <h2>Recent posts</h2>
 
       {
@@ -187,22 +181,4 @@ const recentActivity = posts.slice(0, 5);
     </aside>
   </div>
 
-  <script>
-    const input = document.getElementById('search-input') as HTMLInputElement;
-    const postList = document.getElementById('post-list');
-    if (input && postList) {
-      input.addEventListener('input', () => {
-        const q = input.value.toLowerCase().trim();
-        const items = postList.querySelectorAll('.post-item') as NodeListOf<HTMLElement>;
-        items.forEach((item) => {
-          const title = item.dataset.title || '';
-          const tags = item.dataset.tags || '';
-          const author = item.dataset.author || '';
-          const desc = item.dataset.desc || '';
-          const match = !q || title.includes(q) || tags.includes(q) || author.includes(q) || desc.includes(q);
-          item.style.display = match ? '' : 'none';
-        });
-      });
-    }
-  </script>
 </HomeLayout>
