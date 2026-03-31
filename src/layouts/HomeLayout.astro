@@ -140,6 +140,10 @@ const currentPath = Astro.url.pathname;
         opacity: 0.8;
       }
       .not-by-ai-sidebar:hover img { opacity: 1; }
+      .light-only { display: inline; }
+      .dark-only { display: none; }
+      [data-theme="dark"] .light-only { display: none; }
+      [data-theme="dark"] .dark-only { display: inline; }
       .subtle-link {
         color: var(--color-text-muted) !important;
         text-decoration: none !important;
