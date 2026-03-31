@@ -200,6 +200,12 @@ body {
   padding: calc(var(--topbar-height) + 3rem) 3rem 5rem;
 }
 
+/* === Home Layout === */
+.home-wrapper {
+  padding-top: var(--topbar-height);
+  width: 100%;
+}
+
 /* === Typography === */
 h1,
 h2,
