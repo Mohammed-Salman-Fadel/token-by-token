@@ -11,13 +11,13 @@ const posts = (await getCollection('posts')).sort(
 <BaseLayout title="All Posts">
   <h1>All posts</h1>
 
-  <div class="post-cards">
+  <div class="post-list">
     {
       posts.map((post) => (
-        <a href={`/posts/${post.id}`} class="post-card">
-          <h3>{post.data.title}</h3>
-          <div class="post-card-meta">
-            {post.data.author && <span>{post.data.author}</span>}
+        <div class="post-item">
+          <a href={`/posts/${post.id}`} class="post-title">{post.data.title}</a>
+          <div class="post-item-meta">
+            {post.data.author && <span class="post-author">{post.data.author}</span>}
             <time>
               {new Date(post.data.date).toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -25,18 +25,16 @@ const posts = (await getCollection('posts')).sort(
                 day: 'numeric',
               })}
             </time>
+            {post.data.tags && (
+              <span class="post-item-tags">
+                {post.data.tags.join(', ')}
+              </span>
+            )}
           </div>
           {post.data.description && (
-            <p class="post-card-desc">{post.data.description}</p>
+            <p class="post-desc">{post.data.description}</p>
           )}
-          {post.data.tags && (
-            <div class="post-card-tags">
-              {post.data.tags.map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
-            </div>
-          )}
-        </a>
+        </div>
       ))
     }
   </div>

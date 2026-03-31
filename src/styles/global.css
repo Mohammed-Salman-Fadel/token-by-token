@@ -362,75 +362,67 @@ th {
   line-height: 1.7;
 }
 
-/* === Post Cards === */
-.post-cards {
-  display: grid;
-  gap: 1.2rem;
+/* === Post List === */
+.post-list {
+  display: flex;
+  flex-direction: column;
 }
 
-.post-card {
-  display: block;
-  padding: 1.5rem;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  background: var(--color-card-bg);
-  text-decoration: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+.post-item {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
-.post-card:hover {
-  border-color: var(--color-accent-light);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+.post-item:last-child {
+  border-bottom: none;
 }
 
-.post-card,
-.post-card:hover {
-  color: inherit;
-}
-
-.post-card h3 {
+.post-title {
   font-family: var(--font-sans);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
+  text-decoration: none;
   color: var(--color-text);
-  margin: 0 0 0.4rem;
+  display: block;
+  margin-bottom: 0.3rem;
 }
 
-.post-card-meta {
+.post-title:hover {
+  color: var(--color-accent);
+}
+
+.post-title:visited {
+  color: var(--color-text);
+}
+
+.post-item-meta {
   font-family: var(--font-sans);
   font-size: 0.8rem;
   color: var(--color-text-muted);
   display: flex;
+  align-items: center;
   gap: 0.5rem;
 }
 
-.post-card-meta span::after {
+.post-author::after {
   content: '\00b7';
   margin-left: 0.5rem;
 }
 
-.post-card-desc {
+.post-item-meta time::after {
+  content: '\00b7';
+  margin-left: 0.5rem;
+}
+
+.post-item-tags {
+  font-style: italic;
+}
+
+.post-desc {
   font-size: 0.9rem;
   color: var(--color-text-muted);
-  margin: 0.6rem 0 0;
+  margin: 0.5rem 0 0;
   line-height: 1.5;
-}
-
-.post-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.8rem;
-}
-
-.post-card-tags .tag {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  color: var(--color-text-muted);
-  background: var(--color-sidebar-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 3px;
-  padding: 0.1rem 0.45rem;
 }
 
 /* === Footer === */
