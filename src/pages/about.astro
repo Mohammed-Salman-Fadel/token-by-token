@@ -1,48 +1,114 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+const tagCount = new Set(posts.flatMap(p => p.data.tags || [])).size;
+const authorCount = new Set(posts.map(p => p.data.author).filter(Boolean)).size;
 ---
 
 <BaseLayout title="About">
   <div class="about-page">
-    <h1>About</h1>
 
-    <p class="about-intro">
+    <!-- Typing tagline -->
+    <h1 class="about-title fade-in">About</h1>
+    <p class="typing-tagline" id="typing-tagline"></p>
+
+    <!-- Animated stats -->
+    <div class="about-stats" id="about-stats">
+      <div class="about-stat">
+        <span class="about-stat-num" data-target={posts.length}>0</span>
+        <span class="about-stat-label">posts</span>
+      </div>
+      <div class="about-stat">
+        <span class="about-stat-num" data-target={tagCount}>0</span>
+        <span class="about-stat-label">topics</span>
+      </div>
+      <div class="about-stat">
+        <span class="about-stat-num" data-target={authorCount}>0</span>
+        <span class="about-stat-label">authors</span>
+      </div>
+    </div>
+
+    <div class="gradient-divider"></div>
+
+    <!-- Intro -->
+    <p class="about-intro fade-in">
       <strong>token by token</strong> is a technical blog where we post weekly about topics we learn. All posts discuss ML/AI topics.
     </p>
 
-    <blockquote>
+    <blockquote class="about-quote">
       <p>If you can't explain something to a first year student, then you haven't really understood.</p>
     </blockquote>
 
-    <p>
-      We decided to start this project to encourage each other to learn and dive deep into topics in the ML field. By publishing our work, we are held accountable to potential readers to present concepts in a format and language of high quality and one that could be easily understood by other learners.
+    <p class="fade-in">
+      We decided to start this project to encourage each other to learn and dive deep into topics in the ML field. By publishing our work, we are held accountable to present concepts in a format that could be easily understood by other learners.
     </p>
 
-    <p>
-      It is called <em><strong>token by token</strong></em> because we hope to break down and present the information in bits that are digestible, similar to the way we, the writers, learned them.
+    <p class="fade-in">
+      It is called <em><strong>token by token</strong></em> because we hope to break down and present the information in bits that are digestible, similar to the way we learned them.
     </p>
 
-    <p>
-      We believe that the best way to learn is to teach, and that we only understand things if we can simplify them and explain them.
-    </p>
+    <div class="gradient-divider"></div>
 
+    <!-- Author cards -->
+    <h2>Who we are</h2>
+    <div class="author-cards">
+      <div class="author-card fade-in">
+        <div class="author-initial">D</div>
+        <div class="author-info">
+          <span class="author-name">D.R.</span>
+          <span class="author-role">ML / NLP student</span>
+        </div>
+      </div>
+      <div class="author-card fade-in">
+        <div class="author-initial">S</div>
+        <div class="author-info">
+          <span class="author-name">S.</span>
+          <span class="author-role">ML student</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gradient-divider"></div>
+
+    <!-- What you'll find -->
     <h2>What you'll find here</h2>
-    <ul>
+    <ul class="fade-in">
       <li>Paper breakdowns and implementations</li>
       <li>Concepts explained from scratch</li>
       <li>Code walkthroughs with linked GitHub repos</li>
       <li>Research notes and observations</li>
     </ul>
 
-    <h2>Why "token by token"?</h2>
-    <p>
-      Because that's how language models generate text, and that's how learning works &mdash; one piece at a time.
-    </p>
+    <div class="gradient-divider"></div>
 
+    <!-- FAQ -->
+    <h2>FAQ</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Why no AI in your posts?</summary>
+        <p>Writing is how we learn. If we let AI write for us, we skip the part where understanding actually happens. The struggle of putting a concept into our own words is the whole point.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How do you pick topics?</summary>
+        <p>Curiosity. Whatever catches our interest that week — a paper we stumbled on, a concept that confused us, or something we saw and wanted to understand deeper.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I contribute?</summary>
+        <p>We're open to guest posts. If you have a topic you'd like to write about, pitch it to us via GitHub. We'll review it together and if it fits, you're in.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Why "token by token"?</summary>
+        <p>Because that's how language models generate text, and that's how learning works — one piece at a time.</p>
+      </details>
+    </div>
+
+    <div class="gradient-divider"></div>
+
+    <!-- Footer section -->
     <div class="about-footer">
-      <p>
-        PS: All posts are written entirely by us, humans. No AI is used in the posts we publish.
-      </p>
+      <p>All posts are written entirely by us, humans. No AI is used in the posts we publish.</p>
       <a href="https://notbyai.fyi/hi/token-by-token/" target="_blank" rel="noopener" class="about-badge">
         <img src="/not-by-ai-dark.png" alt="Written by Humans, Not by AI" class="light-only" />
         <img src="/not-by-ai-light.png" alt="Written by Humans, Not by AI" class="dark-only" />
@@ -50,9 +116,64 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
 
     <p class="about-cta">
-      If you spot an error or want to discuss something, feel free to open an issue on <a href="https://github.com/danielquillanroxas/token-by-token" target="_blank" rel="noopener">GitHub</a>. Corrections are welcome.
+      Spot an error? Want to discuss something? Open an issue on <a href="https://github.com/danielquillanroxas/token-by-token" target="_blank" rel="noopener">GitHub</a>.
     </p>
+
   </div>
+
+  <!-- Logo fade-in in topbar on page load -->
+  <script>
+    // Typing animation
+    const tagline = "Learning in public, one token at a time.";
+    const el = document.getElementById('typing-tagline');
+    let i = 0;
+    function typeChar() {
+      if (el && i < tagline.length) {
+        el.textContent += tagline[i];
+        i++;
+        setTimeout(typeChar, 40);
+      }
+    }
+    setTimeout(typeChar, 300);
+
+    // Counter animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const nums = entry.target.querySelectorAll('.about-stat-num');
+          nums.forEach(num => {
+            const target = parseInt(num.getAttribute('data-target') || '0');
+            let current = 0;
+            const step = Math.max(1, Math.floor(target / 30));
+            const interval = setInterval(() => {
+              current += step;
+              if (current >= target) {
+                current = target;
+                clearInterval(interval);
+              }
+              (num as HTMLElement).textContent = String(current);
+            }, 30);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const stats = document.getElementById('about-stats');
+    if (stats) observer.observe(stats);
+
+    // Fade-in on scroll
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+  </script>
 </BaseLayout>
 
 <style is:global>
@@ -60,21 +181,217 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     max-width: 700px;
   }
 
-  .about-intro {
-    font-size: 1.05rem;
-    line-height: 1.8;
+  /* Typing tagline */
+  .typing-tagline {
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    min-height: 1.5em;
+    border-right: 2px solid var(--color-accent);
+    display: inline-block;
+    padding-right: 4px;
+    animation: blink 0.8s step-end infinite;
   }
 
+  @keyframes blink {
+    50% { border-color: transparent; }
+  }
+
+  /* Fade in */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .about-title {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.5s ease forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Stats */
+  .about-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .about-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+  }
+
+  .about-stat-num {
+    font-family: var(--font-sans);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .about-stat-label {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+  }
+
+  /* Gradient divider */
+  .gradient-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    margin: 2rem 0;
+  }
+
+  /* Quote */
+  .about-quote {
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .about-quote:hover {
+    border-left-color: var(--color-accent);
+    background: var(--color-sidebar-bg);
+    transform: translateX(4px);
+  }
+
+  /* Author cards */
+  .author-cards {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .author-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+    flex: 1;
+  }
+
+  .author-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .author-initial {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-name {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .author-role {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-weight: 300;
+  }
+
+  /* FAQ */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+    padding: 0;
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-item summary {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 1rem 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.2s;
+  }
+
+  .faq-item summary:hover {
+    color: var(--color-accent);
+  }
+
+  .faq-item summary::after {
+    content: '+';
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--color-text-muted);
+    transition: transform 0.2s;
+  }
+
+  .faq-item[open] summary::after {
+    content: '-';
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item p {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    padding: 0 0 1rem;
+    line-height: 1.7;
+  }
+
+  /* About footer */
   .about-footer {
     margin: 2rem 0;
     padding: 1.5rem 0;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
   }
 
   .about-footer p {
     font-family: var(--font-sans);
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     font-style: italic;
     color: var(--color-text-muted);
   }
@@ -88,7 +405,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .about-cta {
     font-family: var(--font-sans);
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: var(--color-text-muted);
+  }
+
+  .about-intro {
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 600px) {
+    .author-cards {
+      flex-direction: column;
+    }
+    .about-stats {
+      gap: 1.5rem;
+    }
+    .about-stat-num {
+      font-size: 1.5rem;
+    }
   }
 </style>
