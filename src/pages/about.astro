@@ -181,16 +181,18 @@ const authorCount = new Set(posts.map(p => p.data.author).filter(Boolean)).size;
   /* Two-column about layout */
   .about-layout {
     display: grid;
-    grid-template-columns: 1fr 260px;
-    gap: 3rem;
+    grid-template-columns: 1fr 240px;
+    gap: 2.5rem;
+    max-width: none;
   }
 
   .about-main {
     min-width: 0;
+    max-width: 800px;
   }
 
   .about-side {
-    padding-top: 0.5rem;
+    padding-top: 12rem;
     position: sticky;
     top: calc(var(--topbar-height) + 1rem);
     max-height: calc(100vh - var(--topbar-height) - 2rem);
