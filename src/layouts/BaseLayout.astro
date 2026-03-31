@@ -36,6 +36,25 @@ const currentPath = Astro.url.pathname;
     <style>
       @import '../styles/global.css';
     </style>
+    <style is:global>
+      .post-subtitle,
+      .post-subtitle * {
+        font-family: 'Inter', -apple-system, sans-serif !important;
+        font-weight: 200 !important;
+        font-size: 0.85rem !important;
+        color: var(--color-text-muted);
+        line-height: 1.8;
+        letter-spacing: 0.02em;
+      }
+      .post-subtitle svg {
+        width: 12px !important;
+        height: 12px !important;
+        display: inline-block;
+        vertical-align: -1px;
+        margin-right: 2px;
+        opacity: 0.5;
+      }
+    </style>
 
     <!-- Theme: apply before render to prevent flash -->
     <script is:inline>
