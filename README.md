@@ -10,7 +10,7 @@ We believe that the best way to learn is to teach, and that we only understand t
 
 PS: All posts are written entirely by us, humans. No AI is used in the posts we publish. 
 
-[![Only by humans](public\not-by-ai-light.png)](https://notbyai.fyi/hi/token-by-token/)
+[![Only by humans](public/not-by-ai-light.png)](https://notbyai.fyi/hi/token-by-token/)
 
 ---
 
