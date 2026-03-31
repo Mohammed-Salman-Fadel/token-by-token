@@ -132,6 +132,10 @@ const currentPath = Astro.url.pathname;
       }
       .pill-count { font-size: 0.65rem; opacity: 0.6; }
       .author-pill svg { width: 14px !important; height: 14px !important; opacity: 0.5; }
+      .not-by-ai-sidebar {
+        display: flex;
+        justify-content: center;
+      }
       .not-by-ai-sidebar img {
         width: 120px;
         height: auto;
@@ -205,7 +209,7 @@ const currentPath = Astro.url.pathname;
       <slot />
     </div>
 
-    <footer class="site-footer" style="max-width: var(--content-width); margin: 0 auto; padding: 0 3rem 3rem;">
+    <footer class="site-footer" style="max-width: var(--content-width); margin: 0 auto; padding: 2rem 3rem 3rem;">
       <div class="footer-row">
         <p>token by token &mdash; learning in public</p>
         <a href="https://notbyai.fyi/hi/token-by-token/" target="_blank" rel="noopener" class="not-by-ai">
