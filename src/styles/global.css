@@ -8,7 +8,7 @@
 }
 
 :root {
-  --color-bg: #f5f0e8;
+  --color-bg: #faf6ef;
   --color-text: #2c2c2c;
   --color-text-muted: #6b6b6b;
   --color-accent: #1a5276;
@@ -49,7 +49,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  background: #ece5d8;
+  background: #f0e8da;
   border-bottom: 1px solid var(--color-border);
 }
 
