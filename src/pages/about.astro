@@ -192,12 +192,7 @@ const authorCount = new Set(posts.map(p => p.data.author).filter(Boolean)).size;
 
   .about-side {
     padding-top: 12rem;
-    position: fixed;
-    right: 3rem;
-    top: calc(var(--topbar-height) + 1rem);
-    width: 240px;
-    max-height: calc(100vh - var(--topbar-height) - 2rem);
-    overflow-y: auto;
+    align-self: start;
   }
 
   .about-side h3 {
