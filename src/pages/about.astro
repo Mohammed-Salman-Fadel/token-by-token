@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeLayout from '../layouts/HomeLayout.astro';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('posts');
@@ -7,7 +7,7 @@ const tagCount = new Set(posts.flatMap(p => p.data.tags || [])).size;
 const authorCount = new Set(posts.map(p => p.data.author).filter(Boolean)).size;
 ---
 
-<BaseLayout title="About">
+<HomeLayout title="About">
   <div class="about-layout">
     <!-- Main -->
     <div class="about-main">
@@ -175,7 +175,7 @@ const authorCount = new Set(posts.map(p => p.data.author).filter(Boolean)).size;
 
     document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
   </script>
-</BaseLayout>
+</HomeLayout>
 
 <style is:global>
   /* Two-column about layout */
@@ -183,7 +183,7 @@ const authorCount = new Set(posts.map(p => p.data.author).filter(Boolean)).size;
     display: grid;
     grid-template-columns: 1fr 240px;
     gap: 2.5rem;
-    max-width: none;
+    padding: 1.5rem 3rem 3rem;
   }
 
   .about-main {
