@@ -35,7 +35,7 @@
   --color-border: #333;
   --color-code-bg: #0d0d0d;
   --color-sidebar-bg: #222;
-  --color-link: #5dade2;
+  --color-link: #85c1e9;
   --color-topbar-bg: #111;
   --color-card-bg: rgba(255, 255, 255, 0.04);
 }
@@ -246,6 +246,10 @@ a:hover {
   color: var(--color-accent-light);
 }
 
+a:visited {
+  color: var(--color-link);
+}
+
 /* === Post Meta === */
 .post-meta {
   font-family: var(--font-sans);
@@ -377,6 +381,11 @@ th {
 .post-card:hover {
   border-color: var(--color-accent-light);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.post-card,
+.post-card:hover {
+  color: inherit;
 }
 
 .post-card h3 {
