@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  const authors = [...new Set(posts.map((p) => p.data.author).filter(Boolean))];
+  return authors.map((author) => ({
+    params: { author },
+    props: {
+      author,
+      posts: posts
+        .filter((p) => p.data.author === author)
+        .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()),
+    },
+  }));
+}
+
+const { author, posts } = Astro.props;
+---
+
+<BaseLayout title={`Posts by ${author}`}>
+  <h1>{author}</h1>
+  <p class="filter-count">{posts.length} post{posts.length !== 1 ? 's' : ''}</p>
+
+  <div class="post-list">
+    {
+      posts.map((post) => (
+        <div class="post-item">
+          <a href={`/posts/${post.id}`} class="post-title">{post.data.title}</a>
+          <div class="post-subtitle">
+            <span>{new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+            {post.data.tags && (
+              <span> &middot; {post.data.tags.map((tag, i) => (
+                <span><a href={`/tags/${tag}`} class="subtle-link">{tag}</a>{i < post.data.tags!.length - 1 ? ', ' : ''}</span>
+              ))}</span>
+            )}
+            {post.data.description && <br />}
+            {post.data.description && <span>{post.data.description}</span>}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</BaseLayout>

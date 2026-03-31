@@ -206,6 +206,145 @@ body {
   width: 100%;
 }
 
+.home-content {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem;
+}
+
+.home-main {
+  min-width: 0;
+}
+
+.home-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.sidebar-card {
+  padding: 1.2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-card-bg);
+}
+
+.sidebar-card h3 {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin: 0 0 0.8rem;
+}
+
+.sidebar-card p {
+  font-size: 0.88rem;
+  margin-bottom: 0.6rem;
+}
+
+.sidebar-link {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+
+.sidebar-tags,
+.sidebar-authors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag-pill,
+.author-pill {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  background: var(--color-sidebar-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  padding: 0.2rem 0.6rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.tag-pill:hover,
+.author-pill:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.pill-count,
+.tag-count {
+  font-size: 0.65rem;
+  opacity: 0.6;
+}
+
+.author-pill svg {
+  width: 14px !important;
+  height: 14px !important;
+  opacity: 0.5;
+}
+
+.not-by-ai-sidebar img {
+  width: 120px;
+  height: auto;
+  margin: 0;
+  border-radius: 0;
+  opacity: 0.8;
+}
+
+.not-by-ai-sidebar:hover img {
+  opacity: 1;
+}
+
+/* Subtle links (authors/tags in post lists) */
+.subtle-link {
+  color: var(--color-text-muted) !important;
+  text-decoration: none !important;
+}
+
+.subtle-link:hover {
+  color: var(--color-accent) !important;
+  text-decoration: underline !important;
+}
+
+/* Filter pages */
+.filter-count {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+/* Tags cloud page */
+.tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .home-content {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.2rem;
+  }
+
+  .home-sidebar {
+    order: -1;
+  }
+}
+
 /* === Typography === */
 h1,
 h2,

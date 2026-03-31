@@ -24,7 +24,7 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
   <article>
     <h1>{frontmatter.title}</h1>
     <div class="post-meta">
-      {frontmatter.author && <span>{frontmatter.author}</span>}
+      {frontmatter.author && <span><a href={`/authors/${frontmatter.author}`} class="subtle-link">{frontmatter.author}</a></span>}
       <time>{formattedDate}</time>
       {lastModified && lastModified !== formattedDate && (
         <span class="updated">Updated {lastModified}</span>
@@ -34,7 +34,7 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
       frontmatter.tags && (
         <div class="post-tags">
           {frontmatter.tags.map((tag) => (
-            <span class="tag">{tag}</span>
+            <a href={`/tags/${tag}`} class="tag">{tag}</a>
           ))}
         </div>
       )
@@ -81,5 +81,12 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
     border-radius: 3px;
     padding: 0.15rem 0.5rem;
     letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .post-tags .tag:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
   }
 </style>

@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags || []))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts
+        .filter((p) => p.data.tags?.includes(tag))
+        .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout title={`Posts tagged "${tag}"`}>
+  <h1>#{tag}</h1>
+  <p class="filter-count">{posts.length} post{posts.length !== 1 ? 's' : ''}</p>
+
+  <div class="post-list">
+    {
+      posts.map((post) => (
+        <div class="post-item">
+          <a href={`/posts/${post.id}`} class="post-title">{post.data.title}</a>
+          <div class="post-subtitle">
+            {post.data.author && (
+              <span><a href={`/authors/${post.data.author}`} class="subtle-link">{post.data.author}</a></span>
+            )}
+            {post.data.author && <span> &middot; </span>}
+            <span>{new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+            {post.data.description && <br />}
+            {post.data.description && <span>{post.data.description}</span>}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</BaseLayout>
