@@ -400,9 +400,9 @@ th {
   font-size: 0.85rem;
   color: var(--color-text-muted);
   margin-top: 0.5rem;
-  font-weight: 300;
+  font-weight: 200;
   line-height: 1.8;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
 }
 
 .post-subtitle svg {
