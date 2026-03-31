@@ -163,7 +163,7 @@ const recentActivity = posts.slice(0, 5);
       <!-- Latest commit -->
       {latestCommit.hash && (
         <div class="sidebar-card">
-          <h3>Latest update</h3>
+          <h3>Latest GitHub update</h3>
           <div class="latest-commit">
             <a href={`https://github.com/danielquillanroxas/token-by-token/commit/${latestCommit.hash}`} target="_blank" rel="noopener" class="subtle-link commit-msg">{latestCommit.message}</a>
             <span class="commit-meta">{latestCommit.hash} &middot; {latestCommit.date}</span>
