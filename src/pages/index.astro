@@ -29,10 +29,11 @@ const authors = [...authorCounts.entries()].sort((a, b) => b[1] - a[1]);
 // Latest git commit
 let latestCommit = { message: '', date: '', hash: '' };
 try {
-  const log = execSync('git log -1 --format=%s|||%cI|||%h').toString().trim();
-  const [message, date, hash] = log.split('|||');
+  const msg = execSync('git log -1 --format=%s').toString().trim();
+  const date = execSync('git log -1 --format=%cI').toString().trim();
+  const hash = execSync('git log -1 --format=%h').toString().trim();
   latestCommit = {
-    message: message.length > 50 ? message.slice(0, 50) + '...' : message,
+    message: msg.length > 50 ? msg.slice(0, 50) + '...' : msg,
     date: new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
     hash,
   };
