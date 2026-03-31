@@ -16,24 +16,13 @@ const posts = (await getCollection('posts')).sort(
       posts.map((post) => (
         <div class="post-item">
           <a href={`/posts/${post.id}`} class="post-title">{post.data.title}</a>
-          <div class="post-item-meta">
-            {post.data.author && <span class="post-author">{post.data.author}</span>}
-            <time>
-              {new Date(post.data.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              })}
-            </time>
-            {post.data.tags && (
-              <span class="post-item-tags">
-                {post.data.tags.join(', ')}
-              </span>
-            )}
+          <div class="post-subtitle">
+            {post.data.author && <span>{post.data.author} &middot; </span>}
+            <span>{new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+            {post.data.tags && <span> &middot; {post.data.tags.join(', ')}</span>}
+            {post.data.description && <br />}
+            {post.data.description && <span>{post.data.description}</span>}
           </div>
-          {post.data.description && (
-            <p class="post-desc">{post.data.description}</p>
-          )}
         </div>
       ))
     }
