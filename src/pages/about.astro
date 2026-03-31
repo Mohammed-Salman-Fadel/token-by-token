@@ -414,6 +414,11 @@ const authorCount = new Set(posts.map(p => p.data.author).filter(Boolean)).size;
     line-height: 1.8;
   }
 
+  .light-only { display: inline; }
+  .dark-only { display: none; }
+  [data-theme="dark"] .light-only { display: none; }
+  [data-theme="dark"] .dark-only { display: inline; }
+
   @media (max-width: 600px) {
     .author-cards {
       flex-direction: column;
