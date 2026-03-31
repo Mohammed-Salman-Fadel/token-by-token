@@ -3,29 +3,92 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="About">
-  <h1>About</h1>
-  <p>
-    This is a collection of notes, implementations, and explorations in machine
-    learning and natural language processing. I write to learn, and I publish to
-    keep myself honest.
-  </p>
+  <div class="about-page">
+    <h1>About</h1>
 
-  <h2>What you'll find here</h2>
-  <ul>
-    <li>Paper breakdowns and implementations</li>
-    <li>Concepts explained from scratch</li>
-    <li>Code walkthroughs with linked GitHub repos</li>
-    <li>Research notes and observations</li>
-  </ul>
+    <p class="about-intro">
+      <strong>token by token</strong> is a technical blog where we post weekly about topics we learn. All posts discuss ML/AI topics.
+    </p>
 
-  <h2>Why "token by token"?</h2>
-  <p>
-    Because that's how language models generate text, and that's how learning
-    works &mdash; one piece at a time.
-  </p>
+    <blockquote>
+      <p>If you can't explain something to a first year student, then you haven't really understood.</p>
+    </blockquote>
 
-  <p>
-    If you spot an error or want to discuss something, feel free to reach out.
-    Corrections are welcome.
-  </p>
+    <p>
+      We decided to start this project to encourage each other to learn and dive deep into topics in the ML field. By publishing our work, we are held accountable to potential readers to present concepts in a format and language of high quality and one that could be easily understood by other learners.
+    </p>
+
+    <p>
+      It is called <em><strong>token by token</strong></em> because we hope to break down and present the information in bits that are digestible, similar to the way we, the writers, learned them.
+    </p>
+
+    <p>
+      We believe that the best way to learn is to teach, and that we only understand things if we can simplify them and explain them.
+    </p>
+
+    <h2>What you'll find here</h2>
+    <ul>
+      <li>Paper breakdowns and implementations</li>
+      <li>Concepts explained from scratch</li>
+      <li>Code walkthroughs with linked GitHub repos</li>
+      <li>Research notes and observations</li>
+    </ul>
+
+    <h2>Why "token by token"?</h2>
+    <p>
+      Because that's how language models generate text, and that's how learning works &mdash; one piece at a time.
+    </p>
+
+    <div class="about-footer">
+      <p>
+        PS: All posts are written entirely by us, humans. No AI is used in the posts we publish.
+      </p>
+      <a href="https://notbyai.fyi/hi/token-by-token/" target="_blank" rel="noopener" class="about-badge">
+        <img src="/not-by-ai-dark.png" alt="Written by Humans, Not by AI" class="light-only" />
+        <img src="/not-by-ai-light.png" alt="Written by Humans, Not by AI" class="dark-only" />
+      </a>
+    </div>
+
+    <p class="about-cta">
+      If you spot an error or want to discuss something, feel free to open an issue on <a href="https://github.com/danielquillanroxas/token-by-token" target="_blank" rel="noopener">GitHub</a>. Corrections are welcome.
+    </p>
+  </div>
 </BaseLayout>
+
+<style is:global>
+  .about-page {
+    max-width: 700px;
+  }
+
+  .about-intro {
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .about-footer {
+    margin: 2rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .about-footer p {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+
+  .about-badge img {
+    width: 130px;
+    height: auto;
+    margin: 0.5rem 0 0;
+    border-radius: 0;
+  }
+
+  .about-cta {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+  }
+</style>
