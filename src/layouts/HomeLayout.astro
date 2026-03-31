@@ -89,10 +89,11 @@ const currentPath = Astro.url.pathname;
         align-self: start;
       }
       .sidebar-card {
-        padding: 1.2rem;
-        border: 1px solid var(--color-border);
-        border-radius: 8px;
-        background: var(--color-card-bg);
+        padding: 0 0 1.2rem;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .sidebar-card:last-child {
+        border-bottom: none;
       }
       .sidebar-card h3 {
         font-family: 'Inter', -apple-system, sans-serif;
