@@ -379,7 +379,7 @@ th {
 
 .post-title {
   font-family: var(--font-sans);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 800;
   text-decoration: none;
   color: var(--color-text);
@@ -397,11 +397,20 @@ th {
 
 .post-subtitle {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: var(--color-text-muted);
-  margin-top: 0.4rem;
+  margin-top: 0.5rem;
   font-weight: 300;
-  line-height: 1.6;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+.post-subtitle svg {
+  width: 12px;
+  height: 12px;
+  vertical-align: -1px;
+  margin-right: 2px;
+  opacity: 0.5;
 }
 
 /* === Footer === */
