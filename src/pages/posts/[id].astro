@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
-import { execSync } from 'child_process';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -13,21 +12,8 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-
-let lastModified: string | null = null;
-try {
-  const filePath = `src/content/posts/${post.id}.mdx`;
-  const gitDate = execSync(`git log -1 --format=%cI -- "${filePath}"`).toString().trim();
-  if (gitDate) {
-    lastModified = new Date(gitDate).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  }
-} catch {}
 ---
 
-<PostLayout frontmatter={post.data} lastModified={lastModified}>
+<PostLayout frontmatter={post.data}>
   <Content />
 </PostLayout>
