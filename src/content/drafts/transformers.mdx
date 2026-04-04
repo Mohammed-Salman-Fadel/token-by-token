@@ -1,1 +1,40 @@
-# Paying Attention: Decoding How AI Listens
+---
+title: "Paying Attention: Decoding How AI Listens"
+date: ""
+author: "M. Fadel"
+description: "A high-level introduction to how transformers work and the brief "
+tags: ["transformers", "attention", "from-scratch"]
+---
+
+# Introduction
+
+Prior to the development of the transformer model, there has been many architectural models built in hopes of best achieving true artificial intelligence. In this blog,
+I am not aiming to give full technical and mathematical understanding of the underlying components of the transformer model, rather my goal is to give you an overview of what truly makes the transformer architecture amazing, while providing additional resources for anyone interested in learning further details.
+
+[![Image of transformer block](https://google.com)](https://towardsdatascience.com/wp-content/uploads/2024/11/00n5M-lTWbbuVB0ug.png)
+
+The transformer model consists of the following main components:
+
+- Encoder
+- Feed Forward Neural Networks
+- Multi-Head Attention
+- Layer Normalization
+- Decoder
+
+### Encoder
+
+The encoder is responsible for creating meaningful numeric representation of input. The details of how this is done is not important for now, just know that through some mathematical transformations, all words can be represented with a series of long vectors.
+
+### Feed Forward Neural Network
+
+### Multi-Head Attention Block
+
+Is the core revolutionary component of the transformer model, the attention block itself deserves it's own article, however we will explain the gist of what the attention mechnism is and what it does.
+
+_"Determines how relevant a word is in a sentence, relative to the other words in that sentence."_
+
+If you understand that sentence, the implications of what makes this mechanism game changing becomes obvious. To be able to grade the relevance of a certain word relative to all the other words in a given sentence or paragraph makes the Aritifical Intelligence much more capable of understanding what the "weight" of those words mean.
+
+Again, this happens due to a series of mathematical calculations, while that is out of the scope of this article, many are familiar with cosine similarity as a method of determining the distance between two vectors. Recall the encoder mentioned earlier? since words (or tokens) can be represented using vectors, performing cosine similarity calculations between the vector representations of each word in a sentence relative to the other words in that sentence, will actually give us a form of "similarity test", a single number (from -1 to 1) that represents how closely related or distant those two words are.
+
+### Decoder
