@@ -1,0 +1,125 @@
+---
+title: "Paying Attention: Decoding How AI Listens"
+date: ""
+author: "M. Fadel"
+description: "A high-level introduction to how transformers work"
+tags:
+  [
+    "transformers",
+    "attention",
+    "deep-learning",
+    "machine-learning",
+    "llm",
+    "neural networks",
+  ]
+---
+
+# Introduction
+
+Prior to the development of the transformer model, there has been many architectural
+models built in hopes of best achieving true artificial intelligence. In this blog,
+I am not aiming to give full technical and mathematical understanding of the underlying
+components of the transformer model, rather my goal is to give you an overview of what
+truly makes the transformer architecture amazing, while providing additional resources
+for anyone interested in learning further details.
+
+<br>
+
+<img src="../assets/images/transformers/transformer_block.webp" alt="My Image" width="300" style="display: block; margin: 0 auto;"/>
+
+<br>
+
+The transformer model consists of the following main components:
+
+- Encoder
+- Feed Forward Neural Networks
+- Multi-Head Attention
+- Layer Normalization
+- Decoder
+
+Before we start explaining what each component does, there are a few important points
+to keep track of, especially for those not in the field:
+
+- For the sake of simplicity, I will be reffering to the inputs and outputs of the transformers
+  as "words", even though in reality, the transformer operates on a unit called the **token**
+  which is roughly equivalent to 3/4 of a word.
+
+- There will be some additional details added at the bottom of the page, which I left
+  there because I believe it would make better sense after understand the gist of what each component does.
+
+- To truly make the ideas stick, I will use the sentence example " "
+- Lastly, instead of thinking of the transformer as some form of magic that gives
+  artificial intelligence it's "thinking" capacity, it would be a lot easier to move
+  forward thinking of it as a "next-word" predictor. This will start to make sense the deeper
+  we dive into the details.
+
+## Encoder
+
+The encoder is responsible for creating meaningful numeric representation of input.
+The details of how this is done is not important for now, just know that through
+some mathematical transformations, all words can be represented with a single long vector.
+
+## Feed Forward Neural Network
+
+This is the simplest form of Neural Networks. Think of a neural network similarly
+to how you'd think of the neurons in our brains and how interconnected they are
+together. Each layer of the neural network "fires" (in technicality, a series
+of vectors is passed through different functions and moves to the next layer of neurons)
+to the proceeding layers and so on, until the last layer comes out with an output
+— typically a score for all the words in the predefined vocabulary, the word with the
+highest score will be picked, however this will lead to deterministic results
+to the same input everytime. As a result, different techniques have been developed
+to avoid picking the same word everytime to provide a different response everytime.
+
+<br>
+
+<img src="../assets/images/neural_networks/simple_nn_ex.png" alt="Neural Network" width="500" style="display: block; margin: 0 auto;"/>
+
+<br>
+
+## Normalization Layers
+
+Think of these layers, almost as a form of reset on the numbers being passed from each layer to the next.
+Why would we need to reset the values? well, sometimes the values can get too large
+or too small, skewing the learning process of our neural network. The normalization
+does not entirely reset the value, but rather it performs a mathematical function that
+keeps the value within a certain range no matter how large or small it originally was.
+This helps us avoid the problem of overly large/small numbers.
+
+## Multi-Head Attention Block
+
+Is the core revolutionary component of the transformer model, the attention block
+itself deserves it's own article, however we will explain the gist of what the
+attention mechnism is and what it does.
+
+_"Determines how relevant a word is in a sentence, relative to the other words in that sentence."_
+
+If you understand that sentence, the implications of what makes this mechanism game
+changing becomes obvious. To be able to grade the relevance of a certain word
+relative to all the other words in a given sentence or paragraph makes the Aritifical
+Intelligence much more capable of understanding what the "weight" of those words mean.
+
+Again, this happens due to a series of mathematical calculations, while that is
+out of the scope of this article, many are familiar with the dot-product as a
+method of determining the distance between two vectors. Recall the encoder mentioned
+earlier? since words (or tokens) can be represented using vectors, performing dot-product
+calculations between the vector representations of each word in a sentence
+relative to the other words in that sentence, will actually give us a form of
+"similarity test", originally, the test will be a raw score which is then passed to a function
+(softmax) and will produce a vector of percentages representing the likelihood each word
+in the vocabulary has to being next.
+
+## Decoder
+
+Somewhat similar to the encoder, the decoder uses the encoder's vector representations
+then **autoregressively** generates one word (token) at a time.
+
+---
+
+## Cool Realizations
+
+## References
+
+- add References
+- Images
+- improve examples and flow
